@@ -5,6 +5,7 @@ import de.maxhenkel.voicechat.api.events.EventRegistration;
 import de.maxhenkel.voicechat.api.events.MicrophonePacketEvent;
 import de.maxhenkel.voicechat.api.events.VoicechatServerStartedEvent;
 import de.maxhenkel.voicechat.api.opus.OpusDecoder;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.server.level.ServerPlayer;
 import org.jetbrains.annotations.Nullable;
 
@@ -86,8 +87,7 @@ public class Plugin implements VoicechatPlugin {
 
         player.level().getServer().execute(() -> {
             if (activate(player)) {
-                System.out.println("[PLUGIN]: sending voice game event");
-                player.gameEvent(VcInteraction.VOICE_GAME_EVENT);
+                player.gameEvent(BuiltInRegistries.GAME_EVENT.wrapAsHolder(VcInteraction.VOICE_GAME_EVENT.get()));
             }
         });
     }

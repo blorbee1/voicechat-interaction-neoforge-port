@@ -4,9 +4,11 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 import net.neoforged.neoforge.registries.datamaps.DataMapsUpdatedEvent;
 import net.neoforged.neoforge.registries.datamaps.builtin.NeoForgeDataMaps;
@@ -21,6 +23,7 @@ import net.neoforged.fml.config.ModConfig;
 import net.neoforged.fml.ModContainer;
 
 import java.util.Map;
+import java.util.function.Supplier;
 
 @Mod(VcInteraction.MOD_ID)
 public class VcInteraction {
@@ -29,10 +32,13 @@ public class VcInteraction {
 
     public static final DeferredRegister<GameEvent> EVENTS = DeferredRegister.create(Registries.GAME_EVENT, MOD_ID);
 
-    public static Holder.Reference<GameEvent> VOICE_GAME_EVENT = EVENTS.register("voice", () -> new GameEvent(16));
+    public static Supplier<GameEvent> VOICE_GAME_EVENT = EVENTS.register("voice", () -> new GameEvent(16));
+
+    public static ResourceKey<GameEvent> VOICE_GAME_EVENT_KEY =
+        ResourceKey.create(Registries.GAME_EVENT, ResourceLocation.fromNamespaceAndPath(MOD_ID, "voice"));
 
     public VcInteraction(IEventBus modEventBus, ModContainer modContainer) {
-        modContainer.registerConfig(ModConfig.Type.LOCAL, ServerConfig.SPEC);
+        modContainer.registerConfig(ModConfig.Type.STARTUP, ServerConfig.SPEC);
 
         EVENTS.register(modEventBus);
         NeoForge.EVENT_BUS.register(this);
@@ -44,7 +50,7 @@ public class VcInteraction {
     public void onDataMapsUpdated(DataMapsUpdatedEvent event) {
         event.ifRegistry(Registries.GAME_EVENT, registry -> {
             Map<ResourceKey<GameEvent>, VibrationFrequency> frequencies = registry.getDataMap(NeoForgeDataMaps.VIBRATION_FREQUENCIES);
-            frequencies.put(VOICE_GAME_EVENT.key(), new VibrationFrequency(ServerConfig.VOICE_SCULK_FREQUENCY.get()));
+            frequencies.put(VOICE_GAME_EVENT_KEY, new VibrationFrequency(ServerConfig.VOICE_SCULK_FREQUENCY.get()));
         });
     }
 }
