@@ -1,0 +1,13 @@
+{
+  "itemGroup.vcinteraction": "Example Mod Tab",
+  "block.vcinteraction.example_block": "Example Block",
+  "item.vcinteraction.example_item": "Example Item",
+
+  "vcinteraction.configuration.title": "vcinteraction Configs",
+  "vcinteraction.configuration.section.vcinteraction.common.toml": "vcinteraction Configs",
+  "vcinteraction.configuration.section.vcinteraction.common.toml.title": "vcinteraction Configs",
+  "vcinteraction.configuration.items": "Item List",
+  "vcinteraction.configuration.logDirtBlock": "Log Dirt Block",
+  "vcinteraction.configuration.magicNumberIntroduction": "Magic Number Text",
+  "vcinteraction.configuration.magicNumber": "Magic Number"
+}
