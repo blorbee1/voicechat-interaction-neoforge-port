@@ -86,7 +86,6 @@ public class Plugin implements VoicechatPlugin {
 
         player.level().getServer().execute(() -> {
             if (activate(player)) {
-                System.out.println("[PLUGIN]: sending voice game event");
                 player.gameEvent(VcInteraction.VOICE_GAME_EVENT);
             }
         });
