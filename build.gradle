@@ -20,7 +20,18 @@ sourceSets.main.resources {
 
 repositories {
     maven {
+        url = "https://maven.maxhenkel.de/repository/public"
+    }
+
+    maven {
         url "https://maven.nucleoid.xyz"
+    }
+
+    maven {
+        url "https://api.modrinth.com/maven"
+        content {
+            includeGroup "maven.modrinth"
+        }
     }
 }
 
@@ -69,12 +80,11 @@ neoForge {
 }
 
 configurations {
-    runtimeClasspath.extendsFrom localRuntime
+    runtimeClasspath.extendsFrom localRuntimez
 }
 
 dependencies {
     implementation "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
-    runtimeOnly "de.maxhenkel.voicechat:voicechat-api:${voicechat_api_version}"
     runtimeOnly "maven.modrinth:simple-voice-chat:neoforge-${voicechat_mod_version}"
 }
 
