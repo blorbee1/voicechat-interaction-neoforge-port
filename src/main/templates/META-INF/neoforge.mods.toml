@@ -29,6 +29,6 @@ Unofficial NeoForge port of the Voice Chat Interaction mod
 [[dependencies.${mod_id}]]
     modId="voicechat"
     type="required"
-    versionRange="[${voicechat_mod_version}]"
+    versionRange="[${voicechat_mod_version},)"
     ordering="AFTER"
     side="BOTH"
