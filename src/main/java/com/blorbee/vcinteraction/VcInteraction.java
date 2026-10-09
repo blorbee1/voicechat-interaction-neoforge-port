@@ -39,12 +39,4 @@ public class VcInteraction {
 
         LOGGER.info("VcInteraction started");
     }
-
-    @SubscribeEvent
-    public void onDataMapsUpdated(DataMapsUpdatedEvent event) {
-        event.ifRegistry(Registries.GAME_EVENT, registry -> {
-            Map<ResourceKey<GameEvent>, VibrationFrequency> frequencies = registry.getDataMap(NeoForgeDataMaps.VIBRATION_FREQUENCIES);
-            frequencies.put(VOICE_GAME_EVENT.key(), new VibrationFrequency(ServerConfig.VOICE_SCULK_FREQUENCY.get()));
-        });
-    }
 }
